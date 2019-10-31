@@ -8,32 +8,19 @@ import { WeatherbitService } from './weatherbit.service';
 })
 export class AppComponent {
   title = 'Esercizio Angular';
-  cities = [
-    {
-      nome: 'Torino',
-      temperatura: '14'
-    }, {
-      nome: 'Milano',
-      temperatura: '15'
-    }, {
-      nome: 'Genova',
-      temperatura: '18'
-    }
-  ];
-  selezionata;
+  cities = ['Torino','Milano','Genova'];
+  selezionata: string;
+  temperatura: string;
   constructor(private wbs: WeatherbitService) { }
   clean() {
     this.selezionata=undefined;
   }
   update(x) {
-    this.selezionata.temperatura = x.data[0].temp;
+    this.temperatura = x.data[0].temp;
   }
   refreshTemperature(itemName: string) {
-	var trovato = this.cities.filter(
-      function(el) { return el.nome === itemName; }
-	);
-    this.selezionata = trovato[0];
-    this.wbs.getData(this.selezionata.nome).subscribe(
+    this.selezionata=itemName;
+    this.wbs.getData(itemName).subscribe(
       x => this.update(x),
       err => console.error('Observer got an error: ' + err)
     );
