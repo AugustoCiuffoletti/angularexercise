@@ -26,4 +26,9 @@ export class AppComponent {
     );
 //debugger
   }
+  addCity(newCity: string) {
+    if (newCity) {
+      this.cities.push(newCity);
+    }
+  }
 }
