@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WeatherbitService } from './weatherbit.service';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +21,22 @@ export class AppComponent {
     }
   ];
   selezionata;
+  constructor(private wbs: WeatherbitService) { }
   clean() {
     this.selezionata=undefined;
   }
-  seleziona(itemName: string) {
-    var trovato = this.cities.filter(
+  update(x) {
+    this.selezionata.temperatura = x.data[0].temp;
+  }
+  refreshTemperature(itemName: string) {
+	var trovato = this.cities.filter(
       function(el) { return el.nome === itemName; }
-    );
+	);
     this.selezionata = trovato[0];
+    this.wbs.getData(this.selezionata.nome).subscribe(
+      x => this.update(x),
+      err => console.error('Observer got an error: ' + err)
+    );
+//debugger
   }
 }
