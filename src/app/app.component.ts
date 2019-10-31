@@ -20,10 +20,13 @@ export class AppComponent {
     }
   ];
   selezionata;
-  seleziona(name: string) {
-    this.selezionata = name;
-  }
   clean() {
     this.selezionata=undefined;
+  }
+  seleziona(itemName: string) {
+    var trovato = this.cities.filter(
+      function(el) { return el.nome === itemName; }
+    );
+    this.selezionata = trovato[0];
   }
 }
