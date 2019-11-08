@@ -15,7 +15,7 @@ import { CitiesComponent } from './cities/cities.component';
     HttpClientModule,
     HttpClientJsonpModule
   ],
-  providers: [HttpClient],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
